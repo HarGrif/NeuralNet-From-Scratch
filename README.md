@@ -20,3 +20,12 @@ The neural network consists of a container class `Neural_Net` and a subclass `NN
 There are two example files of how to use it. [This one](example_generate_fresh_network.py) generates a fresh network from a given number of neurons, input data size and output size. 
 [This one](example_load_previous_network.py) loads a previously trained network.
 
+## Contribution, Modification and Distribution
+
+Feel free to use and modify this code for your own projects.
+
+If you encounter any issues or have suggestions for improvement, please open an issue or contribute to the repository.
+
+If you choose to contribute to the repository please do so under the 'modifications' branch. The 'master' branch should never be touched (it is for my uni project).
+
+MIT License Copyright (c) 2024 HarGrif
