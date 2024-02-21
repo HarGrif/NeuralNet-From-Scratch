@@ -1,21 +1,34 @@
 import numpy as np
 
 
+# Container class for whole neural net
 class Neural_Net:
-    def __init__(self, n_layers, n_neurons):
-        self.layers = [NN_Layer() for i in range(n_layers + 1)]
-        self.neurons = np.concatenate(n_neurons, 8)
+    def __init__(self, n_neurons, n_outputs):
+        # Adds parameters for final layer
+        n_neurons.append(n_outputs)
+        # Initialises layers
+        self.layers = [NN_Layer() for i in range(len(n_neurons))]
+        self.neurons = n_neurons
+        self.out = None
 
+    # Initialise each layer when no previous bias, or weights known
     def fresh_start(self, n_inputs):
-        # Initialise each layer
+        i = 0
+        n_inputs = list([n_inputs]) + self.neurons[0:-1]
+        # Initialise each layer with given number of neurons
+        for layer, n_neurons, inputs in zip(self.layers, self.neurons, n_inputs):
+            layer.init_layer_scratch(inputs, n_neurons)
+
+    # Actually runs the net
+    def run(self, layer_input):
+        print("Number of layers:", len(self.layers))
         for layer in self.layers:
-            layer.init_layer_scratch(n_inputs, self.neurons)
-
-    def run(self, X):
-        for layer in self.layers:
-            layer.forward(X)
+            layer.forward(layer_input)
+            layer_input = layer.output
+        self.out = np.argmax(np.array(layer_input))
 
 
+# Subclass for each layer of the neural net
 class NN_Layer:
     def __init__(self):
         self.output = None
@@ -23,9 +36,9 @@ class NN_Layer:
         self.biases = None
 
     # Initialise a fresh layer
-    def init_layer_scratch(self, n_inputs, n_neurons):
+    def init_layer_scratch(self, inputs, n_neurons):
         # Initialise weights as gaussian dist normalised around 1 scaled down by a factor of 0.1
-        self.weights = 0.1 * np.random.randn(n_inputs, n_neurons)
+        self.weights = 0.1 * np.random.randn(int(inputs), int(n_neurons))
         # Initialise all biases as zero
         self.biases = np.zeros((1, n_neurons))
 
