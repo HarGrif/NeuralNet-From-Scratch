@@ -67,6 +67,14 @@ class Neural_Net:
         # Outputs final layer output
         self.out = layer_input
 
+    # Save your network
+    def save_net(self):
+        net_data = []
+        for layer in self.layers:
+            data = np.vstack([layer.biases, layer.weights])
+            net_data.append(data.tolist())
+        return net_data
+
 
 # Subclass for each layer of the neural net
 class NN_Layer:
