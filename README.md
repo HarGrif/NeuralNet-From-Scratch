@@ -12,12 +12,13 @@ This is another project as part of my Final Year Project on GAs at University.
 - Initialization of layers with Gaussian-distributed weights and zero biases.
 - Utilizes the Rectified Linear Unit (ReLU) activation function for hidden layers.
 - Will run the network from given data.
+- Allows for saving of networks
 - ** Does not train the network **
 
 ## Usage
 The neural network consists of a container class `Neural_Net` and a subclass `NN_Layer` for individual layers.
 
-There are two example files of how to use it. [This one](example_generate_fresh_network.py) generates a fresh network from a given number of neurons, input data size and output size. 
+There are two example files of how to use it. [This one](example_generate_fresh_network.py) generates a fresh network from a given number of neurons, input data size and output size and then saves it. 
 [This one](example_load_previous_network.py) loads a previously trained network.
 
 ## Contribution, Modification and Distribution
