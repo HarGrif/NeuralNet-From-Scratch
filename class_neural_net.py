@@ -21,11 +21,15 @@ class Neural_Net:
 
     # Actually runs the net
     def run(self, layer_input):
-        print("Number of layers:", len(self.layers))
+        i = 0
+        final_layer = False
         for layer in self.layers:
-            layer.forward(layer_input)
+            if i == len(self.layers)-1:
+                final_layer = True
+            layer.forward(layer_input, final_layer)
             layer_input = layer.output
-        self.out = np.argmax(np.array(layer_input))
+            i += 1
+        self.out = layer_input
 
 
 # Subclass for each layer of the neural net
@@ -43,9 +47,10 @@ class NN_Layer:
         self.biases = np.zeros((1, n_neurons))
 
     # Forward pass of nn
-    def forward(self, inputs):
+    def forward(self, inputs, final_layer):
         # Take sum of the products of weights and inputs + biases
         self.output = np.dot(inputs, self.weights) + self.biases
-        # ReLU
-        self.output = np.maximum(0, self.output)
+        if not final_layer:
+            # ReLU
+            self.output = np.maximum(0, self.output)
 
