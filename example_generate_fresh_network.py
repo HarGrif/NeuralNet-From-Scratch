@@ -18,3 +18,8 @@ nn.run(X)
 
 print(nn.out)
 
+# Save the network
+my_net = nn.save_net()
+
+print(my_net)
+
